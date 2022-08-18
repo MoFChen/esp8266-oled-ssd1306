@@ -390,6 +390,12 @@ void switchToFrame(uint8_t frame);
  */
 void transitionToFrame(uint8_t frame);
 
+/**
+ * Transition to frame `frame`. 
+ * dir - animation direction, true: forward; false: backward.
+ */
+void transitionToFrame(uint8_t frame, bool dir);
+
 // State Info
 OLEDDisplayUiState* getUiState();
 

@@ -219,6 +219,17 @@ void OLEDDisplayUi::transitionToFrame(uint8_t frame) {
   this->state.frameTransitionDirection = frame < this->state.currentFrame ? -1 : 1;
 }
 
+void OLEDDisplayUi::transitionToFrame(uint8_t frame, bool dir) {
+  if (frame >= this->frameCount) return;
+  this->state.ticksSinceLastStateSwitch = 0;
+  if (frame == this->state.currentFrame) return;
+  this->nextFrameNumber = frame;
+  this->lastTransitionDirection = this->state.frameTransitionDirection;
+  this->state.manualControl = true;
+  this->state.frameState = IN_TRANSITION;
+  this->state.frameTransitionDirection = (dir) ? 1 : -1;
+}
+
 
 // -/----- State information -----\-
 OLEDDisplayUiState* OLEDDisplayUi::getUiState(){
